@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SalesCalculator {
     // 売上集計クラス
     class SalesCounter {
-        private List<Sale> _sales;
+        private IEnumerable<Sale> _sales;
 
         public SalesCounter(string filePath) {
             _sales = ReadSales(filePath);
@@ -31,9 +31,9 @@ namespace SalesCalculator {
         }
         // List 2-17
         //店舗売り上げを求める
-        public Dictionary<string,int> GetPerStoreSales() {
-            Dictionary<string, int> dict = new Dictionary<string, int>();
-            foreach(Sale sale in _sales) {
+        public IDictionary<string,int> GetPerStoreSales() {
+            var dict = new Dictionary<string, int>();
+            foreach(var sale in _sales) {
                 if (dict.ContainsKey(sale.ShopName))
                     //既にコレクションに店舗が設定されている
                     dict[sale.ShopName] += sale.Amount;
