@@ -44,5 +44,19 @@ namespace Exercise3 {
             }
             return dict;
         }
+
+        // 商品カテゴリ別売り上げを求める
+        public IDictionary<string, int> GetPerCategorySales() {
+            var dict = new Dictionary<string, int>();
+            foreach (var sale in _sales) {
+                if (dict.ContainsKey(sale.ProductCategory))
+                    //既にコレクションに店舗が設定されている
+                    dict[sale.ProductCategory] += sale.Amount;
+                else
+                    //コレクションへ商品カテゴリを登録
+                    dict[sale.ProductCategory] = sale.Amount;
+            }
+            return dict;
+        }
     }
 }
