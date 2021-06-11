@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Section01;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,33 +8,29 @@ using System.Threading.Tasks;
 namespace section01 {
     class Program {
         static void Main(string[] args) {
+            var Session = new Dictionary<string, object>();
+            Session["MyProduct"] = new Product();
 
-            // var names = new List<string> {
-            //     "Tokyo","New Delhi","Bangkok","London","Paris","Berlin","Canberra","Hong Kong",
-            // };
-
-            // IEnumerable<string> query = names.Where(s => s.Length <= 5.Select(s =>s.ToLower());
-            // foreach (string s in query) {
-            //     Console.WriteLine(s);
-            // }
-
-            string[] names = {
-                "Tokyo","New Delhi","Bangkok","London","Paris","Berlin","Canberra" };
-            var query = names.Where(s => s.Length <= 5).ToList();
-
-            query.ForEach(Console.WriteLine);
-
-            foreach (var item in query)
-                Console.WriteLine(item);
-            Console.WriteLine("-------");
-
-            names[0] = "Osaka";
-
-            foreach (var item in query)
-                Console.WriteLine(item);
-
-
+            var product = Session["MyProduct"] as Product;
+            if(product.Name == "") {
+                // productが取得できなかった時の処理
+                Console.WriteLine("productが取得できなかった");
+            } else {
+                // productが取得できた時の処理
+                Console.WriteLine("productが取得できた");
             }
+
         }
+
+        private static Product GetProductA() {
+            Sale sale = new Sale();
+            return sale?.Product;  // null条件演算子
+        }
+    }
+
+    class Sale {
+        public string ShopName { get; set; } = "abcde";
+        public int Amount { get; set; } = 12340;
+        public Product Product { get; set; }
     }
 }
