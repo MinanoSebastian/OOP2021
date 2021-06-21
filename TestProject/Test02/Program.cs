@@ -36,8 +36,12 @@ namespace Test02 {
         //問題１　合計値を表示
         //　　　　出力結果【618】
         private static void Exercise01(List<int> numbers) {
-
-
+            int count = 0;
+            foreach(var n in numbers) {
+                if (n == num)
+                    count++;
+            }
+            return count;
 
         }
 
