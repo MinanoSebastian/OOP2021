@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Exercise1 {
     class Program {
         static void Main(string[] args) {
-
+            
 #if false
             #region 問題5.1
 
