@@ -135,30 +135,51 @@ namespace CarReportSystem {
                                                                 );
             dgvRegistData.Refresh(); //コントロールの強制再描画
         }
-
+        
         private void btSave_Click(object sender, EventArgs e) {
             if(sfdFileSave.ShowDialog() == DialogResult.OK) {
+            try { 
                 // バイナリ形式でシリアル化
                 var bf = new BinaryFormatter();
                     
                 using (FileStream fs = File.Open(sfdFileSave.FileName, FileMode.Create)) {
                     bf.Serialize(fs, listCarReport);
+                }catch(Exception ex) {
+                    MessageBox.Show(ex.Message);
                 }
-
             }
         }
+    }
 
         private void btOpen_Click(object sender, EventArgs e) {
             if (ofdFileOpen.ShowDialog() == DialogResult.OK) {
-                // バイナリ形式で逆シリアル化
+                try {
+                    // バイナリ形式で逆シリアル化
                 var bf = new BinaryFormatter();
                 using (FileStream fs = File.Open(ofdFileOpen.FileName, FileMode.Open, FileAccess.Read)) {
                     // 逆シリアル化して読み込む
                     listCarReport = (BindingList<CarReport>) bf.Deserialize(fs);
                     dgvRegistData.DataSource = null;
                     dgvRegistData.DataSource = listCarReport;
+                   }
                 }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+                // 読み込んだデータを各コンボボックスに登録する
+                foreach (var item inlistCarReport) {
+                  setCbAuthor(item.Auther);
+                  setCbCarName(item.CarName);
+                }
+                // データグリッドビューから取得
+                //for(int i = 0; i < dgvRegistData.RowCount; i++) {
+                //    setCbAuthor(dgvRegistData.Rows[i].Cells[1].Value.ToString());
+                //   setCbCarName(dgvRegistData.Rows[i].Cells[3].Value.ToString());
+                //}
             }
         }
+        private void fmMain_Load(object sender, EventArgs e) {
+            dgvRegistData.Columns[5].Visible = false;
+    }
     }
 }
