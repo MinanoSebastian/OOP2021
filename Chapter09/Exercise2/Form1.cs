@@ -34,6 +34,7 @@ namespace Exercise2 {
             var lines = File.ReadLines(inputPath).Select((s, n) => string.Format("{0,4}: {1}", n + 1, s)).ToArray();
 
             File.WriteAllLines(outputPath, lines);
+
         }
     }
 }
