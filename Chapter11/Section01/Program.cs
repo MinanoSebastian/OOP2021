@@ -12,21 +12,11 @@ namespace Section01
         static void Main(string[] args) {
 
             var xdoc = XDocument.Load("novelists.xml");
+            var xtitles = xdoc.Root.Descendants("title");
             
-
-            foreach(var xnovelist in xdoc.Root.Elements())
-            {
-
-                var xname = xnovelist.Element("name");
-                var works = xnovelist.Element("masterpieces")
-                                    .Element("title")
-                                    .Select(x => x.Value);
-
-
-                
-                Console.WriteLine("{0} - {1}",xname.Value, string.Join(",",works));
-                
-
+            foreach(var xtitle in xtitles)
+            {       
+                Console.WriteLine(xtitles.Value);
             }
         }
     }
