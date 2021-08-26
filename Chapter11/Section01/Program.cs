@@ -22,6 +22,7 @@ namespace Section01
                                     .Element("title")
                                     .Select(x => x.Value);
 
+
                 
                 Console.WriteLine("{0} - {1}",xname.Value, string.Join(",",works));
                 
