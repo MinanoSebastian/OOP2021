@@ -12,11 +12,19 @@ namespace Section01
         static void Main(string[] args) {
 
             var xdoc = XDocument.Load("novelists.xml");
-            var xtitles = xdoc.Root.Descendants("title");
+            var xtitles = xdoc.Root.Elements()
+                            .Select(x => new
+                            {
+                                Name = (string)x.Element("name").
+                                Birth = (DateTime)x.Element("birth"),
+                                Death = (DateTime)x.Element("death")
+
+                            });
             
-            foreach(var xtitle in xtitles)
+            foreach(var novelist in novelists)
             {       
-                Console.WriteLine(xtitles.Value);
+                Console.WriteLine("{0} ({1}-{2})",novelist.Name,novelist.Birth.Year,novelist.Death.Year);
+
             }
         }
     }
