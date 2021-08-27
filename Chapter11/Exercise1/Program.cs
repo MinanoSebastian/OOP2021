@@ -26,18 +26,30 @@ namespace Exercise1
         private static void Exercise1_1(string file)
         {
             var xdoc = XDocument.Load(file);
-            var xelements = xdoc.Root.Elements();
-            foreach(var xfile in xelements)
+            var sports = xdoc.Root.Elements().Select(x => new
             {
-                XElement xname = xfile.Element("name");
-                Console.WriteLine(xname.Value);
+                Name = x.Element("name").Value,
+                Teammembers = x.Element("teammembers").Value
+            });
+            foreach(var sport in sports)
+            {
+                Console.WriteLine("{0} {1}", sport.Name, sport.Teammembers);
             }
         }
 
         private static void Exercise1_2(string file)
         {
             var xdoc = XDocument.Load(file);
+            var sports = xdoc.Root.Elements()
+                        .Select(x => new{
+                            Firstplayed = x.Element("fistplayed").Value,
+                            Name = x.Element("name").Attribute("kanji").Value
+                        }).OrderBy(x => int.Parse(x.Firstplayed));
 
+            foreach(var sport in sports)
+            {
+                Console.WriteLine("{0} {1}", sport.Name);
+            }
         }
        
         private static void Exercise1_3(string file)
