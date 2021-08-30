@@ -48,14 +48,23 @@ namespace Exercise1
 
             foreach(var sport in sports)
             {
-                Console.WriteLine("{0} {1}", sport.Name);
-            }
+                Console.WriteLine("{0} {1}", sport.Name,sport.Fileplayed);
+            } 
         }
        
         private static void Exercise1_3(string file)
         {
             var xdoc = XDocument.Load(file);
-
+            var sports = xdoc.Root.Elements()
+                            .Select(x => new
+                            {
+                                Name = x.Element("name").Value,
+                                Teammembers = x.Element("teammembers").Value
+                            });
+                            .orderByDescending(x => int.Parse(x.Teammembers))
+                            .First();
+            Console.WriteLine("{0}", sports.Name);
         }
+
     }
 }
