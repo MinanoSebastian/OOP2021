@@ -12,13 +12,21 @@ namespace Exercise1
         static void Main(string[] args)
         {
             var file = "Sample.xml";
+            Console.WriteLine("")
             Exercise1_1(file);
+            Console.WriteLine();
             Console.WriteLine("--------");
 
             Exercise1_2(file);
+            Console.WriteLine();
             Console.WriteLine("--------");
 
             Exercise1_3(file);
+            Console.WriteLine();
+            Console.WriteLine("--------");
+
+            Exercise1_4(file);
+            Console.WriteLine();
             Console.WriteLine("--------");
 
 
@@ -66,5 +74,16 @@ namespace Exercise1
             Console.WriteLine("{0}", sports.Name);
         }
 
+        private static void Exercise1_4(string file)
+        { 
+            var newfile = "sports.xml"; // 出力する新しいファイル
+            var element = new XElement("novelist",
+                new XElement()
+
+
+            //P290 リスト11.15を参考にする
+            //
+
+        }
     }
 }
