@@ -81,6 +81,7 @@ namespace Exercise1
                 new XElement()
 
 
+
             //P290 リスト11.15を参考にする
             //
 
