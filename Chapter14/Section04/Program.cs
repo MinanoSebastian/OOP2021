@@ -23,13 +23,14 @@ namespace Section04
             //DownloadString();
             //DownloadFileAsync();
             //OpenReadSample();
-            var results = GetWedtherReportFromYahoo(4610);
+            var results = GetWeatherReportFromYahoo(4610);
             foreach( var s in results)
             {
                 Console.WriteLine(s);
             }
             Console.ReadLine(); // 入力待ち
         }
+
 
         public void DownloadString()
         {
