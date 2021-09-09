@@ -24,33 +24,35 @@ namespace RssReader
         {
             setRssTitle(tbUrl.Text);
 
+            //  リンク先のList[lbTitles.SelectedIndex];
+
+
         }
 
         // 指定したURL先からXMLデータを取得しtitle要素を取得し、リストボックスへセットする
-        private void setRssTitle(string text)
+        private void setRssTitle(string uri)
         {
             
                 using (var wc = new WebClient())
                 {
                     wc.Headers.Add("Content-type", "charset=UTF-8");
-                    var uriString = string.Format(
-                        @"http://rss.weather.yahoo.co.jp/rss/days/{0}.xml", cityCode);
-                    var url = new Uri(uriString);
-                    var stream = wc.OpenRead(url);
+                   
+                    var stream = wc.OpenRead(Uri)
 
                     XDocument xdoc = XDocument.Load(stream);
                     var nodes = xdoc.Root.Descendants("title");
                     foreach (var node in nodes)
                     {
-                        string s = Regex.Replace(node.Value, "【|】| - Yahoo!天気・災害 ", "");
-                        yield return s;
+                        
                 }
    　        }
         }
 
         private void tbUrl_TextChanged(object sender, EventArgs e)
         {
-  
+            List<string> = new List<string>();
+            link.Add();
+
         }
     }        
 }
