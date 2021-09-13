@@ -68,7 +68,7 @@ namespace RssReader
         private void button1_Click(object sender, EventArgs e)
         {
             // 新しいFormへ表示する
-            var wbForm = new Form2((items.ToArray()[lbTitles.SelectsIndex]).Description;
+            var wbForm = new Form2((items.ToArray()[lbTitles.SelectsIndex].Link);
             wbForm.Show();
         }
     }        
