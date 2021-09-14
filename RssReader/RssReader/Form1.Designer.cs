@@ -6,7 +6,9 @@ namespace RssReader
         /// <summary>
         /// 必要なデザイナー変数です。
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private System.
+            
+            ComponentModel.IContainer components = null;
 
         /// <summary>
         /// 使用中のリソースをすべてクリーンアップします。
