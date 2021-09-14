@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace SendMail
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void tbSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // メールを送信するためのインスタンスを作成
+                MailMessage mailMessage = new MailMessage();
+                // 差出人アドレス
+                mailMessage.From = new MailAddress("ojsinfosys01@gmail.com");
+                // 宛先(To)
+                mailMessage.To.Add(tbTo.Text);
+                // タイトル
+                mailMessage.Subject = TbTitle.Text;
+                // 本文
+                mailMessage.Body = tbMessage.Text;
+                // SMTPを使ってメールを送信する
+                SmtpClient smtpClient = new SmtpClient();
+                // メールを送信するための認証情報を設定(ユーザー名、パスワード)
+                smtpClient.Credentials = new NetworkCredential("ojsinfosys01@gmail.com", "Infosys");
+                smtpClient.Host = "smtp.gmail.com";
+                smtpClient.Port = 587;
+                smtpClient.EnableSsl = true;
+                smtpClient.Send(mailMessage);
+
+                MessageBox.Show("送信完了");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void tbTo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TbTitle_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbMessage_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
