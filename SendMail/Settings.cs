@@ -8,6 +8,7 @@ namespace SendMail
 {
     class Settings
     {
+        private static Settings instance = null;
 
         public int Port { get; set; }  //ポート番号
         public string Host { get; set; }   //ホスト名
@@ -23,10 +24,11 @@ namespace SendMail
         // インスタンスの取得
         public static Settings getInstance()
         {
-            if(getInstance == null)
+            if(instance == null)
             {
-                instance
+                instance = new Settings();
             }
+            return instance;
         }
         // 初期値
         public string sHost()

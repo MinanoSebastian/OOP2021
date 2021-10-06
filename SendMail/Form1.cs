@@ -59,12 +59,14 @@ namespace SendMail
                 smtpClient.Port = settings.Port;
                 smtpClient.EnableSsl = settings.Ssl;
 
+                //smtpClient.Send(mailMessage); // 非同期でない場合
+
                 // 送信完了時に呼ばれるイベントハンドラの登録
                 smtpClient.SendCompleted += SmtpClient_SendCompleted;
                 //smtpClient.SendCompleted += new SendCompletedEventHandler(SmtpClient_SendCompleted); // 古い書き方
 
                 string userState = "SendMail";
-                smtpClient.SendAsync(MailMessage.userState);
+                smtpClient.SendAsync(mailMessage,userState);
              
             }
             catch(Exception ex)
@@ -89,7 +91,7 @@ namespace SendMail
 
         private void btConfig_Click(object sender, EventArgs e)
         {
-             ConfigForm.ShowDialog();
+            configForm.ShowDialog();
         }
     }
 }
