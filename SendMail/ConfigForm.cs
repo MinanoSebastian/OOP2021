@@ -54,25 +54,7 @@ namespace SendMail
         // 送信データ登録
         private void SettingRegist()
         {
-            settings.Host = tbHost.Text;
-            settings.Port = int.Parse(tbPort.Text);
-            settings.MailAddr = tbUserName.Text;
-            settings.Pass = tbPass.Text;
-            settings.Ssl = cbSsl.Checked;
-
-            // シリアル化
-            var xws = new XmlWriterSettings
-            {
-                Encoding = new System.Text.UTF8Encoding(false),
-                Indent = true,
-                IndentChars = " ",
-            };
-
-            using (var writer = XmlWriter.Create("mailsetting", xws))
-            {
-                var serializer = new DataContractSerializer(settings.GetType());
-                serializer.WriteObject(writer, settings);
-            }
+           
         }
 
         private void btCancel_Click(object sender, EventArgs e)
