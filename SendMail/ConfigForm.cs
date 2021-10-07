@@ -79,5 +79,16 @@ namespace SendMail
         {
             this.Close();
         }
+
+        // 設定画面をロードすると一度だけ実行されるイベントハンドラ
+        private void ConfigForm_Load(object sender, EventArgs e)
+        {
+            tbHost.Text = settings.Host;   
+            tbPort.Text = settings.Port.ToString();  
+            tbUserName.Text = settings.MailAddr; 
+            tbPass.Text = settings.Pass; 
+            cbSsl.Checked = settings.Ssl;  
+            tbSender.Text = settings.MailAddr; 
+        }
     }
 }
