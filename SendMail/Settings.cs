@@ -5,12 +5,18 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.IO;
+using System.Security;
+using System.Windows.Forms;
 
 namespace SendMail
 {
-    class Settings
+    // 設定情報
+    public class Settings
     {
         private static Settings instance = null;
+
+        public static bool Set { get; private set; } = true;
 
         public int Port { get; set; }  //ポート番号
         public string Host { get; set; }   //ホスト名
@@ -29,27 +35,36 @@ namespace SendMail
         // インスタンスの取得
         public static Settings getInstance()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new Settings();
-                // XMLファイル読み込み(逆シリアル化) 【P303参照】
-                using (var reader = XmlReader.Create("mailsetting.xml"))
-                {
-                    var serializer = new DataContractSerializer(typeof(Settings));
-                    var readSettings = serializer.ReadObject(reader) as Settings;
 
-                    instance.Host = readSettings.Host;
-                    instance.Port = readSettings.Port;
-                    instance.MailAddr = readSettings.MailAddr;
-                    instance.Pass = readSettings.Pass;
-                    instance.Ssl = readSettings.Ssl;
+                // XMLファイル読み込み(逆シリアル化) 【P303参照】
+                try
+                {
+                    using (var reader = XmlReader.Create("mailsetting.xml"))
+                    {
+                        var serializer = new DataContractSerializer(typeof(Settings));
+                        var readSettings = serializer.ReadObject(reader) as Settings;
+
+                        instance.Host = readSettings.Host;
+                        instance.Port = readSettings.Port;
+                        instance.MailAddr = readSettings.MailAddr;
+                        instance.Pass = readSettings.Pass;
+                        instance.Ssl = readSettings.Ssl;
+                    }
                 }
-            }
+                // ファイルがない場合 (初回起動時)
+                catch(Exception ex)
+                {
+                    Set = false;   // データ未設定
+                }
+            }   
             return instance;
         }
 
         // 送信データ登録
-        public void setSendConfig(string host, int port, string mailAddr, string pass, bool ssl)
+        public bool setSendConfig(string host, int port, string mailAddr, string pass, bool ssl)
         {
             Host = host;
             Port = port;
@@ -70,6 +85,10 @@ namespace SendMail
                 var serializer = new DataContractSerializer(this.GetType());
                 serializer.WriteObject(writer, this);
             }
+
+            Set = true;
+
+            return true;   // 登録完了
         }
 
 
@@ -91,7 +110,7 @@ namespace SendMail
 
         public string sPass()
         {
-            return "Infosys2019";
+            return "Infosys2021";
         }
         public bool bSsl()
         {

@@ -29,6 +29,12 @@ namespace SendMail
 
         private void tbSend_Click(object sender, EventArgs e)
         {
+            if (!Settings.Set)
+            {
+                MessageBox.Show("送信情報を設定してください");
+                return;
+            }
+
             try
             {
                 // メールを送信するためのインスタンスを作成
@@ -36,17 +42,26 @@ namespace SendMail
                 // 差出人アドレス
                 mailMessage.From = new MailAddress(settings.MailAddr);
                 // 宛先(To)
-                mailMessage.To.Add(tbTo.Text);
+                if (tbTo.Text == "")
+                {
+                    MessageBox.Show("宛先が未入力です。");
+                }
+                if(tbMessage.Text == "")
+                {
+                    MessageBox.Show("本文を入力しましょ。");
+                }
 
-                if(tbCc.Text != "")
+                mailMessage.To.Add(tbTo.Text);
+                if (tbCc.Text != "")
                 {
                     mailMessage.CC.Add(tbCc.Text);
                 }
-                if(tbBcc.Text != "")
+              
+                if (tbBcc.Text != "")
                 {
                     mailMessage.Bcc.Add(tbBcc.Text);
                 }
-
+                    
                 // 件名 (タイトル)
                 mailMessage.Subject = TbTitle.Text;
                 // 本文
@@ -98,8 +113,26 @@ namespace SendMail
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // 起動時に送信情報を未設定の場合設定画面を表示する
+            if (Settings.Set)
+            {
+                configForm.ShowDialog();
+            }
+        }
 
-           
+        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void 新規作成NToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbMessage_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
