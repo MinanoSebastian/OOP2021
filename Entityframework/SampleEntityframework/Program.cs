@@ -69,20 +69,58 @@ namespace SampleEntityframework
                     Console.WriteLine();
                 }
             }
+
             }
 
             private static void Exercise13_1_3()
             {
-
+                using(var db = new BooksDbContext())
+            {
+                var books = db.Books.Where(b => b.Title.Length == db.Books.Max(x => x.Title.Length));
+                foreach(var book in books)
+                {
+                    Console.WriteLine("{0} {1} {2}({3:yyyy/MM/dd})",
+                        book.Title, book.PublishedYear,
+                        book.Author.Name, book.Author.Birthday
+                        );
+                }
+            }
+                
             }
 
             private static void Exercise13_1_4()
             {
+                using(var db = new BooksDbContext())
+            {
+                var books = db.Books.OrderBy(b => b.PublishedYear).Take(3);
+                foreach(var book in books)
+                {
+                    Console.WriteLine("{0} {1} {2}({3:yyyy/MM/dd})",
+                        book.Title, book.PublishedYear,
+                        book.Author.Name, book.Author.Birthday);
+                }
+            }
 
             }
 
             private static void Exercise13_1_5()
             {
+                using(var db = new BooksDbContext())
+            {
+                var authors = db.Authors.OrderByDescending(a => a.Birthday);
+                foreach(var author in authors)
+                {
+                    Console.WriteLine("{0} {1:yyyy/MM}", author.Name, author.Birthday);
+                    foreach(var book in author.Books)
+                    {
+                        Console.WriteLine(" {0} {1}",
+                            book.Title, book.PublishedYear,
+                            book.Author.Name, book.Author.Birthday);
+                        
+                    }
+                    Console.WriteLine();
+                }
+            }
 
             }
         
