@@ -152,7 +152,10 @@ namespace CarReportSystem {
     }
 
         private void btOpen_Click(object sender, EventArgs e) {
-            if (ofdFileOpen.ShowDialog() == DialogResult.OK) {
+
+
+#if
+        if (ofdFileOpen.ShowDialog() == DialogResult.OK) {
                 try {
                     // バイナリ形式で逆シリアル化
                 var bf = new BinaryFormatter();
@@ -178,6 +181,7 @@ namespace CarReportSystem {
                 //}
             }
         }
+#else
         private void fmMain_Load(object sender, EventArgs e) {
             dgvRegistData.Columns[5].Visible = false;
     }
