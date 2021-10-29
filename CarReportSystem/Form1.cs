@@ -243,14 +243,23 @@ namespace CarReportSystem
 
         private void carReportDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            dtpDate.Value = (DateTime)carReportDataGridView.CurrentRow.Cells[1].Value ;  // 日付
-            cbAuthor.Text = carReportDataGridView.CurrentRow.Cells[2].Value.ToString(); // 記録者
-            setMakerRadioButton(
-                (CarReport.MakerGroup)
-                    Enum.Parse(typeof(CarReport.MakerGroup),carReportDataGridView.CurrentRow.Cells[3].Value.ToString()));  // メーカー文字列型
-            cbCarName.Text = carReportDataGridView.CurrentRow.Cells[4].Value.ToString(); // 車名
-            tbReport.Text = carReportDataGridView.CurrentRow.Cells[5].Value.ToString(); // レポート
-            pbPicture.Image = ByteArrayToImage((byte[])carReportDataGridView.CurrentRow.Cells[6].Value); // 画像
+            if (carReportDataGridView.CurrentRow == null) return;
+            try
+            {
+                dtpDate.Value = (DateTime)carReportDataGridView.CurrentRow.Cells[1].Value;    //日付
+                cbAuthor.Text = carReportDataGridView.CurrentRow.Cells[2].Value.ToString();   //記録者
+                                                                                              //メーカー（文字列 → 列挙型）
+                setMakerRadioButton(
+                    (CarReport.MakerGroup)Enum.Parse(typeof(CarReport.MakerGroup), carReportDataGridView.CurrentRow.Cells[3].Value.ToString()));
+                cbCarName.Text = carReportDataGridView.CurrentRow.Cells[4].Value.ToString();  //車名
+                tbReport.Text = carReportDataGridView.CurrentRow.Cells[5].Value.ToString();   //レポート
+                pbPicture.Image = ByteArrayToImage((byte[])carReportDataGridView.CurrentRow.Cells[6].Value);     //画像
+
+            }
+            catch (Exception)
+            {
+                pbPicture.Image = null;
+            }
         }
 
         // バイト配列をImageオブジェクトに変換
@@ -266,6 +275,22 @@ namespace CarReportSystem
             ImageConverter imgconv = new ImageConverter();
             byte[] b = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
             return b;
+        }
+
+        private void carReportDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorMoveFirstItem1_Click(object sender, EventArgs e)
+        {
+            dtpDate.Value = DateTime.Now;
+            cbAuthor.Text = "";
+            setMakerRadioButton(CarReport.MakerGroup.その他);
+            cbCarName.Text = "";
+            tbReport.Text = "";
+            pbPicture.Image = null;
+
         }
     }
 }
