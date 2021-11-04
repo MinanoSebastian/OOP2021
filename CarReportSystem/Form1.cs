@@ -236,9 +236,18 @@ namespace CarReportSystem
                 //}
 #endif
         }
+
+
         private void fmMain_Load(object sender, EventArgs e)
         {
-            //dgvRegistData.Columns[5].Visible = false;
+            carReportDataGridView.Columns[0].Visible = false;
+            carReportDataGridView.Columns[1].HeaderText = "日付";
+            carReportDataGridView.Columns[2].HeaderText = "記録者";
+            carReportDataGridView.Columns[3].HeaderText = "メーカー";
+            carReportDataGridView.Columns[4].HeaderText = "車種";
+            carReportDataGridView.Columns[5].HeaderText = "レポート";
+            carReportDataGridView.Columns[6].Visible = false;
+            
         }
 
         private void carReportDataGridView_SelectionChanged(object sender, EventArgs e)
@@ -248,25 +257,34 @@ namespace CarReportSystem
             {
                 dtpDate.Value = (DateTime)carReportDataGridView.CurrentRow.Cells[1].Value;    //日付
                 cbAuthor.Text = carReportDataGridView.CurrentRow.Cells[2].Value.ToString();   //記録者
-                                                                                              //メーカー（文字列 → 列挙型）
-                setMakerRadioButton(
-                    (CarReport.MakerGroup)Enum.Parse(typeof(CarReport.MakerGroup), carReportDataGridView.CurrentRow.Cells[3].Value.ToString()));
                 cbCarName.Text = carReportDataGridView.CurrentRow.Cells[4].Value.ToString();  //車名
                 tbReport.Text = carReportDataGridView.CurrentRow.Cells[5].Value.ToString();   //レポート
+                //メーカー（文字列 → 列挙型）
+                //var mk = (CarReport.MakerGroup)Enum.Parse(typeof(CarReport.MakerGroup), carReportDataGridView.CurrentRow);
+                setMakerRadioButton(
+                    (CarReport.MakerGroup)Enum.Parse(typeof(CarReport.MakerGroup), carReportDataGridView.CurrentRow.Cells[3].Value.ToString()));
                 pbPicture.Image = ByteArrayToImage((byte[])carReportDataGridView.CurrentRow.Cells[6].Value);     //画像
 
             }
-            catch (Exception)
+            catch (InvalidCastException)
             {
                 pbPicture.Image = null;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         // バイト配列をImageオブジェクトに変換
         public static Image ByteArrayToImage(byte[] b)
         {
-            ImageConverter imgconv = new ImageConverter();
-            Image img = (Image)imgconv.ConvertFrom(b);
+            Image img = null;
+            if(b.Length > 0)
+            {
+                ImageConverter imgconv = new ImageConverter();
+                img = (Image)imgconv.ConvertFrom(b);
+            }
             return img;
         }
         // Imageオブジェクトをバイト配列に変換
@@ -277,6 +295,7 @@ namespace CarReportSystem
             return b;
         }
 
+        // データグリッドビューのエラー対応()
         private void carReportDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
 
@@ -290,6 +309,17 @@ namespace CarReportSystem
             cbCarName.Text = "";
             tbReport.Text = "";
             pbPicture.Image = null;
+
+        }
+
+        private void btConnect_Click_1(object sender, EventArgs e)
+        {
+            this.carReportTableAdapter.Fill(this.infosys202110DataSet.CarReport);
+        }
+
+        private void bindingNavigatorAddNewItem1_Click(object sender, EventArgs e)
+        {
+            dtpDate.Value = DateTime.Now;
 
         }
     }
