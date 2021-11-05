@@ -55,7 +55,6 @@ namespace RssReader
             this.tbUrl.Name = "tbUrl";
             this.tbUrl.Size = new System.Drawing.Size(227, 25);
             this.tbUrl.TabIndex = 1;
-            this.tbUrl.TextChanged += new System.EventHandler(this.tbUrl_TextChanged);
             // 
             // btRead
             // 

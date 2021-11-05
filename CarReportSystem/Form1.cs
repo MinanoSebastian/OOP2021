@@ -320,7 +320,11 @@ namespace CarReportSystem
         private void bindingNavigatorAddNewItem1_Click(object sender, EventArgs e)
         {
             dtpDate.Value = DateTime.Now;
-
+            cbAuthor.Text = "";
+            cbCarName.Text = "";
+            tbReport.Text = "";
+            setMakerRadioButton(CarReport.MakerGroup.その他);
+            pbPicture.Image = null;
         }
     }
 }

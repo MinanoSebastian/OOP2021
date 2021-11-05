@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarReportSystem", "CarReportSystem\CarReportSystem.csproj", "{C82266BE-6C97-4294-89E1-F1FD0B87B6E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp", "WPF\SampleApp\SampleApp.csproj", "{7C48D73F-5C82-4CF5-B18A-1387952AA6DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{90D337A4-96AC-4757-904B-D149133AAF6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{C82266BE-6C97-4294-89E1-F1FD0B87B6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C82266BE-6C97-4294-89E1-F1FD0B87B6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C82266BE-6C97-4294-89E1-F1FD0B87B6E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C48D73F-5C82-4CF5-B18A-1387952AA6DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C48D73F-5C82-4CF5-B18A-1387952AA6DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C48D73F-5C82-4CF5-B18A-1387952AA6DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C48D73F-5C82-4CF5-B18A-1387952AA6DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7C48D73F-5C82-4CF5-B18A-1387952AA6DA} = {90D337A4-96AC-4757-904B-D149133AAF6D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BFB2350D-437C-418A-B1EC-5FBE716CF266}
