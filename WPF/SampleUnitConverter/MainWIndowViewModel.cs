@@ -59,6 +59,11 @@ namespace SampleUnitConverter
                 new DelegateCommand(
                 () => this.ImperialValue = 
                  this.CurrentImperialUnit.FromMetricUnit(this.CurrentMetricUnit, this.MetricValue));
+
+            this.ImperialUnitToMetric =
+                new DelegateCommand(
+                () => this.MetricValue =
+                 this.CurrentMetricUnit.FromImperialUnit(this.CurrentImperialUnit, this.imperialValue));
         }
     }
 }
