@@ -20,40 +20,88 @@ namespace NumberGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Random rand= new Random();
+        private int anserNum;
+        
+        private const int Rows = 5;     // 行
+        private const int Columns = 5; //　列
+
+        private SolidColorBrush selectedButtonColor = new SolidColorBrush(Colors.Blue);
+        private SolidColorBrush hitButtonColor = new SolidColorBrush(Colors.Yellow);
+
+
+
         public MainWindow()
         {
             InitializeComponent();
+            
+        }
+        
+        private  void button_click(object sender, RoutedEventArgs e)
+        {
+            Button bt = e.Source as Button;
+            bt.Background = Brushes.PeachPuff;
+
+            var count = int.Parse(((Button)sender).Content.ToString());
+
+            if (count < anserNum)
+            {
+                // 大きいとき
+                this.comment.Text = "もっとでけーよ";
+            }
+            else if (count > anserNum)
+            {
+                // 小さいとき
+                this.comment.Text = "もっとちいせーよ";
+            }
+            else if (count == anserNum)
+            {
+                // 値が一緒のとき
+                this.comment.Text = "せーかい";
+            }
         }
 
-        private void Num1_Click(object sender, RoutedEventArgs e)
+        public void random(int min, int max)
         {
-            Num1.Background = new SolidColorBrush(Colors.Blue);
+            Random rm = new System.Random();
+            anserNum = rm.Next(min, max);
         }
 
-        private void Num2_Click(object sender, RoutedEventArgs e)
-        {
-            Num2.Background = new SolidColorBrush(Colors.Red);
-        }
 
-        private void Num3_Click(object sender, RoutedEventArgs e)
+        /*private void MainDisp_Loaded(object sender, RoutedEventArgs e)
         {
-            Num3.Background = new SolidColorBrush(Colors.PeachPuff);
-        }
+            // 正解を取得
+            anserNum = random.Next(Rows * Columns) + 1;
 
-        private void Num4_Click(object sender, RoutedEventArgs e)
-        {
-            Num4.Background = new SolidColorBrush(Colors.Yellow);
-        }
+            // 行
+            for(int i = 0; i < Rows; i++)
+            {
+                grid.RowDefinitions.Add(new RowDefinition());
+            }
+            // 列
+            for(int i = 0; i < Rows; i++)
+            {
+                grid.ColumDefinitions.Add(new ColumnDefinition());
+            }
 
-        private void Num5_Click(object sender, RoutedEventArgs e)
-        {
-            Num5.Background = new SolidColorBrush(Colors.Green);
-        }
-
-        private void Num6_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("あ");
-        }
+            for(int i = 0; i<Rows; i++)
+            {
+                for(int j = 0; j < Rows; j++)
+                {
+                    var bt = new Button();
+                    bt.Width = MainWindw.Width / Colums;
+                    bt.Height = MainWindow.Height / Rows;
+                    
+                    bt.Content = (j+ 1) + i * Rows;
+                    bt.Click += Bt_Click;
+                    Grid.SetRow(bt_1);
+                    Grid.SetColum(bt, j);
+                    buttons.Add(bt);
+                }
+            }
+            buttons.ForEach(bt => grid.Children.Add(bt));
+            MainForm.Height += textDisp.Height + 50;
+        }*/  
     }
 }
 

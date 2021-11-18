@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleUnitConverter", "..\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberGame", "..\NumberGame\NumberGame.csproj", "{1D8E4FDE-1E3D-41F0-9FB6-2837B48978AE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{21D475A9-581D-44BF-AB4A-9DCE649F97F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pelmanism", "..\..\Game\Pelmanism\Pelmanism.csproj", "{6E5E718E-25DE-4956-8C87-A89F7543027F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{1D8E4FDE-1E3D-41F0-9FB6-2837B48978AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D8E4FDE-1E3D-41F0-9FB6-2837B48978AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D8E4FDE-1E3D-41F0-9FB6-2837B48978AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E5E718E-25DE-4956-8C87-A89F7543027F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E5E718E-25DE-4956-8C87-A89F7543027F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E5E718E-25DE-4956-8C87-A89F7543027F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E5E718E-25DE-4956-8C87-A89F7543027F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6E5E718E-25DE-4956-8C87-A89F7543027F} = {21D475A9-581D-44BF-AB4A-9DCE649F97F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0FD428B3-E7D5-4B0A-9F39-F62087213D60}
