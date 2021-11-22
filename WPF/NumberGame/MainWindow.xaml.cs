@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace NumberGame
 {
@@ -20,23 +22,40 @@ namespace NumberGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Random rand= new Random();
-        private int anserNum;
-        
-        private const int Rows = 5;     // 行
-        private const int Columns = 5; //　列
+        DispatcherTimer dt = new DispatcherTimer();
+        Stopwatch sw = new Stopwatch();
 
-        private SolidColorBrush selectedButtonColor = new SolidColorBrush(Colors.Blue);
-        private SolidColorBrush hitButtonColor = new SolidColorBrush(Colors.Yellow);
+        Random rand = new Random();
+        private static int anserNum = 0;
+
+        //private Random rand= new Random();
+        //private int anserNum;
+        
+        //private const int Rows = 5;     // 行
+        //private const int Columns = 5; //　列
+
+        //private SolidColorBrush selectedButtonColor = new SolidColorBrush(Colors.Blue);
+        //private SolidColorBrush hitButtonColor = new SolidColorBrush(Colors.Yellow);
 
 
 
         public MainWindow()
         {
+            anserNum = rand.Next(1, 26);
             InitializeComponent();
-            
+
+            dt.Interval = new TimeSpan(0, 0, 0, 0, 1);
+            dt.Start();
+            sw.Start();
+            dt.Tick += Dt_Tick;
+            this.Title = "NumberGame [00:00:000]";
         }
-        
+
+        private void Dt_Tick(object sender, EventArgs e)
+        {
+            this.Title = "NumberGame [" + sw.Elapsed.ToString(@"mm\:ss\:fff") + "]";
+        }
+
         private  void button_click(object sender, RoutedEventArgs e)
         {
             Button bt = e.Source as Button;
