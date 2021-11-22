@@ -127,7 +127,7 @@ namespace SendMail
 
         private void 新規作成NToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void tbMessage_TextChanged(object sender, EventArgs e)
