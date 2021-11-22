@@ -298,7 +298,7 @@ namespace CarReportSystem
         // データグリッドビューのエラー対応()
         private void carReportDataGridView_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-
+            
         }
 
         private void bindingNavigatorMoveFirstItem1_Click(object sender, EventArgs e)
