@@ -119,7 +119,6 @@ namespace Pelmanism
                     timer1.Stop();
                     buttonStart.Enabled = true; // スタートボタン選択可
                 }
-                
             }
         }
         /// <summary>
@@ -131,7 +130,7 @@ namespace Pelmanism
         {
             foreach(Card card in playingCards)
             {
-                if (card.State)
+                if (!card.State)
                     return false;
             }
             return true;
